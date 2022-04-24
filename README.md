@@ -1,4 +1,4 @@
-#firechat App
+# firechat App
 
 to Install the dependencies:
 
