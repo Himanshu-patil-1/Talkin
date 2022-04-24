@@ -1,4 +1,4 @@
-#firechat App
+# talkin App
 
 to Install the dependencies:
 
@@ -12,4 +12,4 @@ To run the development server simply run the following command:
 yarn dev
 ```
 
-good luck
+
