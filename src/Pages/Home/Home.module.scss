@@ -1,0 +1,37 @@
+.container{
+    padding: 5px 15px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.MessageArea{
+    width: 98%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Message{
+    background-color: #eee;
+    padding: 10px 15px;
+    border-radius: 10px;
+    max-width: 30vw;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    p{
+        font-size: 12px;
+    }
+}
+
+.current{
+    float: right;
+}
+
+.SendMessageContainer{
+    width: 98%;
+    position: absolute;
+    bottom: 20px;
+}
