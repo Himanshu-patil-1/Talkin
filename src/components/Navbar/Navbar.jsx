@@ -22,7 +22,7 @@ const Navbar = () => {
         className="is-size-4-desktop 
       is-size-5-mobile has-text-weight-bold "
       >
-        FireChat 🔥
+        TalkIn 🔥
       </h1>
       {user.auth && (
         <div className="is-flex is-align-items-center">

@@ -3,12 +3,13 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyA3iB-yIRmmqS--NzOYEWROTSuF9eFIHwg',
-  authDomain: 'firechat-app-c285e.firebaseapp.com',
-  projectId: 'firechat-app-c285e',
-  storageBucket: 'firechat-app-c285e.appspot.com',
-  messagingSenderId: '90530949574',
-  appId: '1:90530949574:web:b8194db42eedda484d6ac7',
+  apiKey: 'AIzaSyAvw2TENVSuTjgOyW69AH3tqjwhoX8FVfg',
+  authDomain: 'talkin-project.firebaseapp.com',
+  projectId: 'talkin-project',
+  storageBucket: 'talkin-project.appspot.com',
+  messagingSenderId: '760899861952',
+  appId: '1:760899861952:web:e427ea4a7b2aac0626dc25',
+  measurementId: 'G-1JBR6LJBCD',
 };
 
 export const app = initializeApp(firebaseConfig);

@@ -40,10 +40,9 @@ const Auth = () => {
     <div class={styles.container}>
       <form className={`${styles.loginContainer} box`} onSubmit={handleSignIn}>
         <div className="block">
-          <h1 className="title py-2">Firebase firechat app</h1>
+          <h1 className="title py-2 has-text-centered">TalkIn chat app</h1>
           <p className="subtitle py-2">
-            Welcome to the new firechat app <br /> authenticate to start using
-            it
+            Welcome to the new talkIn app <br /> authenticate to start using it
           </p>
         </div>
         <button className="button is-link" type="submit">
