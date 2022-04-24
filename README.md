@@ -1,4 +1,4 @@
-# firechat App
+# talkin App
 
 to Install the dependencies:
 
