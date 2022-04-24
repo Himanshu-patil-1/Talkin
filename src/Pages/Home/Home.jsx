@@ -27,10 +27,10 @@ const Home = () => {
     useRecorder();
   const { user } = useSelector((state) => state.user);
   const colRef = collection(db, 'messages');
-  const [message, setMessage] = React.useState('');
   const [messages, setMessages] = React.useState(null);
   const [uploadingAudio, setUploadingAudio] = React.useState(false);
   const [deletingAudio, setDeletingAudio] = React.useState(false);
+  const [CurrentDeleteIndex, setCurrentDeleteIndex] = React.useState('');
   const storage = getStorage(app);
 
   const getMessages = () => {
@@ -42,31 +42,6 @@ const Home = () => {
       });
       setMessages(messagesData);
     });
-  };
-
-  const sendMessage = async () => {
-    if (message !== '' || ' ') {
-      try {
-        await addDoc(colRef, {
-          message: message,
-          name: user.name,
-          email: user.email,
-          createdAt: serverTimestamp(),
-        });
-        setMessage('');
-      } catch (err) {
-        console.log(err.message);
-      }
-    }
-  };
-
-  const deleteMessage = async (id) => {
-    const deleteRef = doc(db, 'messages', id);
-    try {
-      await deleteDoc(deleteRef);
-    } catch (err) {
-      console.log(err.message);
-    }
   };
 
   const sendAudio = () => {
@@ -89,6 +64,7 @@ const Home = () => {
   };
 
   const deleteAudio = (fileName, id) => {
+    setCurrentDeleteIndex(id);
     const desertRef = ref(storage, `voiceNotes/${fileName}`);
     setDeletingAudio(true);
     // Delete the file
@@ -116,6 +92,8 @@ const Home = () => {
       <div className={styles.MessageArea}>
         {messages === null ? (
           <h1>loading</h1>
+        ) : messages.length === 0 ? (
+          <h1>No Voice messages yet</h1>
         ) : (
           messages.map((message, index) => (
             <div
@@ -126,15 +104,6 @@ const Home = () => {
                   message.email === user.email ? 'flex-end' : 'flex-start',
               }}
             >
-              <h1>
-                {message.message}
-                {message.email === user.email && !message.audio ? (
-                  <i
-                    className="fa-solid fa-trash ml-3"
-                    onClick={() => deleteMessage(message.id)}
-                  ></i>
-                ) : null}
-              </h1>
               <div
                 style={{
                   display: 'flex',
@@ -144,8 +113,8 @@ const Home = () => {
               >
                 <p>{message.name.split(' ')[0]}</p>
                 {message.audio ? (
-                  deletingAudio ? (
-                    <h1>deleting ...</h1>
+                  deletingAudio && CurrentDeleteIndex === message.id ? (
+                    <h1 className="ml-3">deleting ...</h1>
                   ) : (
                     <i
                       className="fa-solid fa-trash ml-3"
@@ -159,16 +128,7 @@ const Home = () => {
           ))
         )}
       </div>
-      <div className={`${styles.SendMessageContainer} is-flex`}>
-        <input
-          className="input"
-          type="text"
-          value={message}
-          onChange={(e) => {
-            setMessage(e.target.value);
-          }}
-          placeholder="Enter your message"
-        />
+      <div className={`${styles.SendMessageContainer} is-flex `}>
         {!isRecording && !audioURL && (
           <button className="button" onClick={startRecording}>
             <i className="fa-solid fa-microphone"></i>
@@ -190,11 +150,6 @@ const Home = () => {
         {audioURL && (
           <button className="button" onClick={ClearAudioURL}>
             cancel
-          </button>
-        )}
-        {!audioURL && (
-          <button className="button is-link" onClick={sendMessage}>
-            Send <i className="fa-solid fa-paper-plane ml-3"></i>
           </button>
         )}
       </div>
